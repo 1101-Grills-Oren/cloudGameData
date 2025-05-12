@@ -1,1 +1,1 @@
-{"neroa": 15600, "maste": 7400}
+{"neroa": 15600, "maste": 7400, "conno": 100}
