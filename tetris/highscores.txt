@@ -1,1 +1,1 @@
-{"neroa": 14300, "maste": 0, "conno": 1700, "gravi": 7900}
+{"neroa": 14300, "maste": 0, "conno": 1700, "gravi": 7900, "leona": 10300}
