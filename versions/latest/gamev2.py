@@ -332,7 +332,7 @@ else:
         width=width/currentdepth
         height=height/currentdepth
         if shouldCenter:
-            OPENGL_CAMERA_SHIFT=[OPENGL_CAMERA_SHIFT[0]-(centerX+width/2)/5,OPENGL_CAMERA_SHIFT[1]-centerY/5]
+            OPENGL_CAMERA_SHIFT=[OPENGL_CAMERA_SHIFT[0]-(centerX+width/2)/2,OPENGL_CAMERA_SHIFT[1]-centerY/2]
         #print(centerX,centerY)
         if shouldCenter!=-1:
             verts = [(width, height), (width,-height), (-width,-height), (-width,height)]
@@ -436,7 +436,7 @@ else:
     lastCameraPos=[0,0]
     def drawAll(all):
         global currentRenderOptions
-        currentRenderOptions['shadow']=800
+        currentRenderOptions['shadow']=700
         global currentdepth
         global baseDepth
         global CAMERA_POS
@@ -503,11 +503,11 @@ else:
                                                             drawQuad(tempRect[0]-CAMERA_POSX[0]*CAMERA_SCALE, tempRect[1]-CAMERA_POSX[1]*CAMERA_SCALE,tempRect[2],tempRect[3], i.imgid,0,[False,currentRenderOptions['shadow'],1.5])
                                                         except Exception as err:
                                                             print('saveMarker prerender error ',err)
-                                                    elif type(i) in [Hazard]:
-                                                        try:
-                                                            drawQuad(tempRect[0]-CAMERA_POSX[0]*CAMERA_SCALE, tempRect[1]-CAMERA_POSX[1]*CAMERA_SCALE,tempRect[2],tempRect[3], i.imgid,0,[False,currentRenderOptions['shadow'],0])
-                                                        except Exception as err:
-                                                            print('prerender error ',err)
+                                                    #elif type(i) in [Hazard]:
+                                                    #    try:
+                                                    #        drawQuad(tempRect[0]-CAMERA_POSX[0]*CAMERA_SCALE, tempRect[1]-CAMERA_POSX[1]*CAMERA_SCALE,tempRect[2],tempRect[3], i.imgid,0,[False,currentRenderOptions['shadow'],0])
+                                                    #    except Exception as err:
+                                                    #        print('prerender error ',err)
                                                     else:
                                                         drawQuad(tempRect[0]-CAMERA_POSX[0]*CAMERA_SCALE, tempRect[1]-CAMERA_POSX[1]*CAMERA_SCALE,tempRect[2],tempRect[3], i.imgid)
                                                     if 'lightLevel' in i.__dict__:
@@ -999,8 +999,8 @@ else:
                         d=i.pos[1]+i.height+i.velocity[1]*1.5*60**2/FRAMERATE**2
                         mins=[min(mins[0],a),min(mins[1],b)]
                         maxes=[max(maxes[0],c),max(maxes[1],d)]
-                mins=[mins[0]-20,mins[1]-20]
-                maxes=[maxes[0]+20,maxes[1]+20]
+                mins=[mins[0]-10,mins[1]-10]
+                maxes=[maxes[0]+10,maxes[1]+10]
                 self.pos=mins
                 self.rect.left=self.pos[0]
                 self.rect.top=self.pos[1]
@@ -3030,7 +3030,7 @@ else:
             self.rect.size=[[w,h] if v in [0,6] else [20,20]][0]
             self.depth=0
             self.shouldRender=True
-            self.lightLevel=[-7 if v in [0,2,3,4,5] else 0][0]
+            self.lightLevel=[-17 if v in [0,2,3,4,5] else 0][0]
             self.prevRect=self.rect
         def update(self):
             if 'rect' in self.__dict__:
@@ -4962,13 +4962,13 @@ else:
                               "0000 0000 0000 0000 0001 0001 0001 0001 0001 0001 0001 0001 0001 0001 0001 0001 0001 0001 0001 0001".replace(' ',''),
                               "0000 0000 0000 0000 0001 1000 1000 1000 1000 1000 1000 1000 0001 0001 0001 0001 1000 1000 1000 0001".replace(' ',''),
                               "0000 0000 0000 0000 0001 1000 1000 1000 1000 1000 1000 1000 0001 0001 0001 0001 1000 1000 1000 0001".replace(' ',''),
-                              "0000 0000 0000 0000 0001 1000 1000 1000 1000 1000 1000 0000 0001 0001 0001 0001 0001 0001 0001 0001".replace(' ',''),
-                              "0000 0000 0000 0000 0001 1000 1000 1000 1000 1000 0000 0111 1001 1001 0000 0000 0000 0000 0000 0000".replace(' ',''),
-                              "0000 0000 0000 0000 0001 1000 1000 1000 1000 0000 0111 1001 1001 1001 0000 0000 0000 0000 0000 0000".replace(' ',''),
-                              "0000 0000 0000 0000 0001 1000 1000 1000 0000 0111 1001 1001 1001 1001 0000 0000 0000 0000 0000 0000".replace(' ',''),
-                              "0000 0000 0000 0000 0001 1000 1000 0000 0111 1001 1001 1001 1001 0011 0000 0000 0000 0000 0000 0101".replace(' ',''),
-                              "0000 0000 0000 0000 0001 1000 0000 0111 1001 1001 1001 0100 0001 0001 0001 0000 0000 0000 0001 0001".replace(' ',''),
-                              "0000 0000 0000 0000 0001 0000 0111 1001 1001 1001 0100 1000 1000 1000 1000 0000 0000 0000 1000 1000".replace(' ',''),
+                              "0000 0000 0000 0000 0001 1000 1000 1000 1000 1000 1000 1000 0001 0001 0001 0001 0001 0001 0001 0001".replace(' ',''),
+                              "0000 0000 0000 0000 0001 1000 1000 1000 1000 1000 1000 0111 1001 1001 0000 0000 0000 0000 0000 0000".replace(' ',''),
+                              "0000 0000 0000 0000 0001 1000 1000 1000 1000 1000 0111 1001 1001 1001 0000 0000 0000 0000 0000 0000".replace(' ',''),
+                              "0000 0000 0000 0000 0001 1000 1000 1000 1000 0111 1001 1001 1001 1001 0000 0000 0000 0000 0000 0000".replace(' ',''),
+                              "0000 0000 0000 0000 0001 1000 1000 1000 0111 1001 1001 1001 1001 0011 0000 0000 0000 0000 0000 0101".replace(' ',''),
+                              "0000 0000 0000 0000 0001 1000 1000 0111 1001 1001 1001 0100 0001 0001 0001 0000 0000 0000 0001 0001".replace(' ',''),
+                              "0000 0000 0000 0000 0001 1000 0111 1001 1001 1001 0100 1000 1000 1000 1000 0000 0000 0000 1000 1000".replace(' ',''),
                               "0000 0000 0000 0000 0001 0111 1001 1001 1001 0100 1000 1000 1000 1000 1000 0110 0110 0110 1000 1000".replace(' ',''),
                               "0000 0000 0000 0000 0111 1001 1001 1001 0100 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000".replace(' ',''),
                               "0000 0000 0000 0000 1001 1001 1001 0100 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000".replace(' ',''),
