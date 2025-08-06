@@ -323,14 +323,14 @@ FRAGMENT_SHADER_MULTIPLY = """
             TexCoords3=vec2(TexCoords.x+0.5,TexCoords.y);
             }
             vec4 sampled = vec4(texture(text, TexCoords2).r, texture(text, TexCoords2).g, texture(text, TexCoords2).b, texture(text, TexCoords2).a);
-            sampled.x=min(sampled.x,1);
-            sampled.y=min(sampled.y,1);
-            sampled.z=min(sampled.z,1);
+            sampled.x=min(sampled.x,1.5);
+            sampled.y=min(sampled.y,1.5);
+            sampled.z=min(sampled.z,1.5);
             
             vec4 sampledb = vec4(texture(text, TexCoords3).r, texture(text, TexCoords3).g, texture(text, TexCoords3).b, texture(text, TexCoords3).a);
-            sampledb.x=min(sampledb.x,1);
-            sampledb.y=min(sampledb.y,1);
-            sampledb.z=min(sampledb.z,1);
+            sampledb.x=min(sampledb.x,1.5);
+            sampledb.y=min(sampledb.y,1.5);
+            sampledb.z=min(sampledb.z,1.5);
             color = vec4(sampled.x*sampledb.x,sampled.y*sampledb.y,sampled.z*sampledb.z,1);
             
         }
@@ -353,7 +353,6 @@ uniform float weight[5] = float[] (0.227027, 0.1945946, 0.1216216, 0.054054, 0.0
 void main()
 {             
     vec2 tex_offset = 1.0 / textureSize(text, 0); // gets size of single texel
-    
     vec3 result = texture(text, TexCoords).rgb * weight[0]; // current fragment's contribution
     if(horizontal)
     {
@@ -470,6 +469,28 @@ postProcessEffectList.append({'id':1,'from':10,'to':7,'args':{'horizontal':('boo
 postProcessEffectList.append({'id':1,'from':11,'to':6,'args':{'horizontal':('bool',True)},'every':lightingupdateevery})
 postProcessEffectList.append({'id':1,'from':10,'to':7,'args':{'horizontal':('bool',False)},'every':lightingupdateevery})
 postProcessEffectList.append({'id':1,'from':11,'to':6,'args':{'horizontal':('bool',True)},'every':lightingupdateevery})
+
+
+#startexperiment
+postProcessEffectList.append({'id':1,'from':10,'to':7,'args':{'horizontal':('bool',False)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':11,'to':6,'args':{'horizontal':('bool',True)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':10,'to':7,'args':{'horizontal':('bool',False)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':11,'to':6,'args':{'horizontal':('bool',True)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':10,'to':7,'args':{'horizontal':('bool',False)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':11,'to':6,'args':{'horizontal':('bool',True)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':10,'to':7,'args':{'horizontal':('bool',False)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':11,'to':6,'args':{'horizontal':('bool',True)},'every':lightingupdateevery})
+
+postProcessEffectList.append({'id':1,'from':10,'to':7,'args':{'horizontal':('bool',False)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':11,'to':6,'args':{'horizontal':('bool',True)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':10,'to':7,'args':{'horizontal':('bool',False)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':11,'to':6,'args':{'horizontal':('bool',True)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':10,'to':7,'args':{'horizontal':('bool',False)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':11,'to':6,'args':{'horizontal':('bool',True)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':10,'to':7,'args':{'horizontal':('bool',False)},'every':lightingupdateevery})
+postProcessEffectList.append({'id':1,'from':11,'to':6,'args':{'horizontal':('bool',True)},'every':lightingupdateevery})
+#endexperiment
+
 
 
 postProcessEffectList.append({'id':1,'from':6,'to':3,'args':{'horizontal':('bool',False)}})
@@ -591,12 +612,13 @@ FRAGMENT_SHADER = """
             BrightColor=vec4(sampled.xyz*isGlowy*sampled.w,sampled.w);
 
             LightColor=BrightColor;
-            LightColor2=vec4(max(0,fadeAmount),max(0,fadeAmount),max(0,fadeAmount),1);
+            LightColor2=vec4(max(0,fadeAmount),max(0,fadeAmount),max(0,fadeAmount),sampled.w/2);
+            LightColor=vec4(BrightColor.xyz+vec3(max(0,fadeAmount),max(0,fadeAmount),max(0,fadeAmount)),BrightColor.w);
             }else{
             BrightColor=vec4(vec3(1,1,1)*isGlowy*sampled.w,sampled.w);
 
             LightColor=BrightColor;
-            LightColor2=vec4(max(0,fadeAmount),max(0,fadeAmount),max(0,fadeAmount),1);
+            LightColor2=vec4(max(0,fadeAmount)*(1-sampled.w),max(0,fadeAmount)*(1-sampled.w),max(0,fadeAmount)*(1-sampled.w),sampled.w);
             }
             GuiColor=vec4(0,0,0,0);
             }else{
@@ -719,8 +741,8 @@ def render_rect_textured(window,x,y,w,h,texX,texY,texW,texH,txt):
                
     glActiveTexture(GL_TEXTURE0)
     
-    glEnable(GL_BLEND)
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    #glEnable(GL_BLEND)
+    #glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
     glBindVertexArray(VAO)
     w = w
@@ -759,8 +781,8 @@ def render_quad(window,x1,y1,x2,y2,x3,y3,x4,y4,txt):
                
     glActiveTexture(GL_TEXTURE0)
     
-    glEnable(GL_BLEND)
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    #glEnable(GL_BLEND)
+    #glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
     glBindVertexArray(VAO)
     #w = w
@@ -813,8 +835,8 @@ def render_quad_textured(window,p1,p2,p3,p4,t1,t2,t3,t4,txt,flgs=[0,0,0]):
                
     glActiveTexture(GL_TEXTURE0)
     
-    glEnable(GL_BLEND)
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    #glEnable(GL_BLEND)
+    #glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
     glBindVertexArray(VAO)
     #w = w
@@ -1031,6 +1053,10 @@ def updateWindow(commands,frameLoc,fpsAvg):
     cursorPos=glfw.get_cursor_pos(window)
     glClearColor(0,0,0,0.5)
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+
+    glEnable(GL_BLEND)
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+    
     glDrawBuffers(layout[0], [GL_COLOR_ATTACHMENT0+i for i in range(layout[0])]);  
     for i in commands:
             i[-1]=i[-1]
