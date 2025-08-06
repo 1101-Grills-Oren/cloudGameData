@@ -2819,7 +2819,7 @@ else:
             self.rotation=rotation
             self.type=2
             self.damage=2
-            self.lightLevel=3;
+            self.lightLevel=10;
             self.pull=pull;
             self.updateFrame()
             self.prevRect.left=self.rect.left
