@@ -1,0 +1,20 @@
+Installation instructions:
+1. Unzip gameassets.zip to some folder. Copy the file path of the folder that contains the folder titled 'specialgamev1' (for me, bc specialgamev1 is at "M:/images/specialgamev1",
+ it would be at "M:/images"), and insert it at line 216 (replace "M:/images" with the full file path of wherever you put the assets)
+2. If you don't have Python 3.12 installed, do that now. (Official download for installer is at https://www.python.org/downloads/release/python-3120/)
+3. Insert both python files (gamev2.py and glfw_postproc.py) at %localappdata%\Programs\Python\Python312\Lib (or if that folder does not exist, find the install folder for python and put it in the Lib
+ subfolder (not the lowercase one))
+4. Open up powershell. Run py -m pip install pygame PyOpenGl numpy pillow pyautogui pyperclip freetype glfw pyglm
+
+To run:
+In powershell, run py -m gamev2
+
+
+
+If it instacrashes, let me know and send me the error msg
+
+
+To Close: (sorry that this is messy)
+1.click the close button on the active game window a few times
+2.go into the powershell window you started the game with
+3.press CTRL+C (in powershell) repeatedly until the game window closes
