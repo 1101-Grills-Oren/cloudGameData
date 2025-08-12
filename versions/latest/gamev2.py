@@ -235,7 +235,16 @@ else:
     import glfw_postproc as glfwApi
     # see if we can load more than standard BMP
     if not pg.image.get_extended():
-        raise SystemExit("Sorry, extended image module required")
+        def newPgLoad(imgf,*args):
+            img = Image.open(imgf)
+            surf=pg.Surface((img.width,img.height))
+            pixels = img.load()
+            for x in range(img.width):
+                for y in range(img.height):
+                    surf.set_at((x,y),pixels[x,y]
+            print(pixels[img.width-1,img.height-1]) 
+        pg.image.load=newPgLoad
+        #raise SystemExit("Sorry, extended image module required")
     
     
     # game constants
