@@ -445,7 +445,7 @@ else:
     lastCameraPos=[0,0]
     def drawAll(all):
         global currentRenderOptions
-        currentRenderOptions['shadow']=700
+        #currentRenderOptions['shadow']=700
         global currentdepth
         global baseDepth
         global CAMERA_POS
