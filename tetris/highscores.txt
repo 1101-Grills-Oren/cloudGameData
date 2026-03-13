@@ -1,1 +1,1 @@
-"{'neroa': 26800, 'maste': -7400, 'conno': 1700, 'gravi': 7900, 'leona': 10300, 'daveg': 2800}"
+{'neroa': 26800, 'maste': -7400, 'conno': 1700, 'gravi': 7900, 'leona': 10300, 'daveg': 2800}
