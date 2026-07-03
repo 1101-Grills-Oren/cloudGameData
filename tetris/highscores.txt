@@ -1,1 +1,1 @@
-{'neroa': 31500, 'conno': 1700, 'gravi': 7900, 'leona': 10300, 'daveg': 9500, 'ethan': 600, 'jupie': 10200, 'roger': 0, 'No em': 1300, 'magnu': 3400, 'Briggles!': 100, 'gill': 0, 'marc': 0, 's0me0ne': 0, 'TalenMud': 3500, '404': 0, 'Hello': 0}
+{'neroa': 31500, 'conno': 1700, 'gravi': 7900, 'leona': 10300, 'daveg': 9500, 'ethan': 600, 'jupie': 10200, 'roger': 0, 'No em': 1300, 'magnu': 3400, 'Briggles!': 100, 'gill': 0, 'marc': 0, 's0me0ne': 0, 'TalenMud': 3500, '404': 0, 'Hello': 0, 'nothankyou': 0}
